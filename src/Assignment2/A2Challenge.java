@@ -136,5 +136,9 @@ public class A2Challenge {
         new Thing(kw, 9, 4);
         new Thing(kw, 9, 6);
         
+        // make karel move the snow from the driveway to the sidewalk
+        
+        // make tina move the snow from the sidewalk to the end of the sidewalk
+        
     }
 }
