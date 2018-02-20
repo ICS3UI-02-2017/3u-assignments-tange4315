@@ -148,25 +148,28 @@ public class A2Challenge {
             }
             
             while(karel.frontIsClear()) {
+                // if the front is clear and if karel can pick up snow, he will pick up snow and move
                 if(karel.canPickThing()) {
                     karel.pickThing();
                     karel.move();
+                // if karel can't pick up snow, he will move on with his life
                 }else{
                     karel.move();
                 }
+                // if karel has reached the end of the driveway and can still pick up snow, he will pick up snow
                 if(!karel.frontIsClear()) {
                     if(karel.canPickThing()) {
                         karel.pickThing();
                     }
                 }
             }
-            
+            // once karel has reached the end of the driveway, he will turn around
             karel.turnAround();
-            
+            // karel will return to the sidewalk
             while(karel.frontIsClear()) {
                 karel.move();
             }
-            
+            // karel will leave his snow on the sidewalk and find another driveway to shovel
             karel.turnLeft();
             karel.putAllThings();
             karel.move();
