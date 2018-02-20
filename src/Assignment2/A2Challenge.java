@@ -137,8 +137,56 @@ public class A2Challenge {
         new Thing(kw, 9, 6);
         
         // make karel move the snow from the driveway to the sidewalk
-        
+        while(karel.isFacingSouth()) {
+            karel.turnLeft();
+            
+            // if front is not clear, karel will turn right, move, and turn left
+            if(!karel.frontIsClear()) {
+                karel.turnRight();
+                karel.move();
+                karel.turnLeft();
+            }
+            
+            while(karel.frontIsClear()) {
+                if(karel.canPickThing()) {
+                    karel.pickThing();
+                    karel.move();
+                }else{
+                    karel.move();
+                }
+                if(!karel.frontIsClear()) {
+                    if(karel.canPickThing()) {
+                        karel.pickThing();
+                    }
+                }
+            }
+            
+            karel.turnAround();
+            
+            while(karel.frontIsClear()) {
+                karel.move();
+            }
+            
+            karel.turnLeft();
+            karel.putAllThings();
+            karel.move();
+        }
+
         // make tina move the snow from the sidewalk to the end of the sidewalk
+        while(tina.frontIsClear()) {
+            // if tina can't pick snow up, tina moves forward
+            if(!tina.canPickThing()) {
+                tina.move();
+            // if tina can pick snow up, tina picks snow up and moves forward
+            }else{
+                tina.pickAllThings();
+                tina.move();
+            }
+            // if tina has reached the end of the sidewalk, tina will put all snow there
+            if(!tina.frontIsClear()) {
+                tina.putAllThings();
+            }
+        }
         
     }
 }
