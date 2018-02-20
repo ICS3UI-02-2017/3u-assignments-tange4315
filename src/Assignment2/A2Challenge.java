@@ -137,7 +137,7 @@ public class A2Challenge {
         new Thing(kw, 9, 6);
         
         // make karel move the snow from the driveway to the sidewalk
-        while(karel.isFacingSouth()) {
+        while(karel.frontIsClear()) {
             karel.turnLeft();
             
             // if front is not clear, karel will turn right, move, and turn left
