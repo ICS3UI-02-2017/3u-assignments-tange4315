@@ -19,13 +19,13 @@ public class A2Q1 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         // create a city for the robot
         City kw = new City();
-        
+
         // create a robot to put in kw
         RobotSE robot = new RobotSE(kw, 1, 1, Direction.EAST);
-        
+
         // create things to put in kw
         new Thing(kw, 1, 2);
         new Thing(kw, 1, 3);
@@ -37,20 +37,19 @@ public class A2Q1 {
         new Thing(kw, 1, 9);
         new Thing(kw, 1, 10);
         new Thing(kw, 1, 11);
-        
+
         // make robot pick up 7 things
         robot.move();
-        
-        while(robot.canPickThing()) {
+
+        while (robot.canPickThing()) {
             robot.pickThing();
             robot.move();
             // make robot move on without picking up the rest of the things
-            if(robot.countThingsInBackpack() >= 7) {
+            if (robot.countThingsInBackpack() >= 7) {
                 robot.move(3);
             }
-            
+
         }
-        
+
     }
-    
 }
