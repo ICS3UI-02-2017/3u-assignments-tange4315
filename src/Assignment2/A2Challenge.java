@@ -20,14 +20,14 @@ public class A2Challenge {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+
         // create a city for the robots
         City kw = new City();
-        
+
         // create robots to put in kw
         RobotSE karel = new RobotSE(kw, 0, 2, Direction.SOUTH);
         RobotSE tina = new RobotSE(kw, 0, 2, Direction.SOUTH);
-        
+
         // create the road
         new Wall(kw, 0, 0, Direction.WEST);
         new Wall(kw, 1, 0, Direction.WEST);
@@ -49,7 +49,7 @@ public class A2Challenge {
         new Wall(kw, 7, 1, Direction.EAST);
         new Wall(kw, 8, 1, Direction.EAST);
         new Wall(kw, 9, 1, Direction.EAST);
-        
+
         // put snow on the road
         new Thing(kw, 0, 1);
         new Thing(kw, 1, 0);
@@ -63,7 +63,7 @@ public class A2Challenge {
         new Thing(kw, 8, 1);
         new Thing(kw, 9, 1);
         new Thing(kw, 9, 0);
-        
+
         // create the sidewalks and the driveways
         new Wall(kw, 0, 2, Direction.EAST);
         new Wall(kw, 1, 3, Direction.NORTH);
@@ -100,7 +100,7 @@ public class A2Challenge {
         new Wall(kw, 8, 3, Direction.SOUTH);
         new Wall(kw, 9, 2, Direction.EAST);
         new Wall(kw, 9, 2, Direction.SOUTH);
-        
+
         // put snow on the sidewalk and the driveways
         new Thing(kw, 1, 2);
         new Thing(kw, 1, 3);
@@ -118,7 +118,7 @@ public class A2Challenge {
         new Thing(kw, 8, 4);
         new Thing(kw, 8, 6);
         new Thing(kw, 7, 7);
-        
+
         // put snow in kw
         new Thing(kw, 0, 3);
         new Thing(kw, 0, 4);
@@ -135,30 +135,29 @@ public class A2Challenge {
         new Thing(kw, 9, 3);
         new Thing(kw, 9, 4);
         new Thing(kw, 9, 6);
-        
+
         // make karel move the snow from the driveway to the sidewalk
-        while(karel.frontIsClear()) {
+        while (karel.frontIsClear()) {
             karel.turnLeft();
-            
-            // if front is not clear, karel will turn right, move, and turn left
-            if(!karel.frontIsClear()) {
+
+            // if there is no driveway, karel will move on
+            if (!karel.frontIsClear()) {
                 karel.turnRight();
                 karel.move();
                 karel.turnLeft();
             }
-            
-            while(karel.frontIsClear()) {
-                // if the front is clear and if karel can pick up snow, he will pick up snow and move
-                if(karel.canPickThing()) {
+
+            while (karel.frontIsClear()) {
+                // if there is snow, karel will pick up the snow
+                if (karel.canPickThing()) {
                     karel.pickThing();
                     karel.move();
-                // if karel can't pick up snow, he will move on with his life
-                }else{
+                } else {
                     karel.move();
                 }
                 // if karel has reached the end of the driveway and can still pick up snow, he will pick up snow
-                if(!karel.frontIsClear()) {
-                    if(karel.canPickThing()) {
+                if (!karel.frontIsClear()) {
+                    if (karel.canPickThing()) {
                         karel.pickThing();
                     }
                 }
@@ -166,7 +165,7 @@ public class A2Challenge {
             // once karel has reached the end of the driveway, he will turn around
             karel.turnAround();
             // karel will return to the sidewalk
-            while(karel.frontIsClear()) {
+            while (karel.frontIsClear()) {
                 karel.move();
             }
             // karel will leave his snow on the sidewalk and find another driveway to shovel
@@ -176,20 +175,19 @@ public class A2Challenge {
         }
 
         // make tina move the snow from the sidewalk to the end of the sidewalk
-        while(tina.frontIsClear()) {
-            // if tina can't pick snow up, tina moves forward
-            if(!tina.canPickThing()) {
+        while (tina.frontIsClear()) {
+            // if tina can't pick snow up from the sidewalk, tina moves forward
+            if (!tina.canPickThing()) {
                 tina.move();
-            // if tina can pick snow up, tina picks snow up and moves forward
-            }else{
+            } else {
                 tina.pickAllThings();
                 tina.move();
             }
-            // if tina has reached the end of the sidewalk, tina will put all snow there
-            if(!tina.frontIsClear()) {
+            // when tina has reached the end of the sidewalk, tina will put all snow there
+            if (!tina.frontIsClear()) {
                 tina.putAllThings();
             }
         }
-        
+
     }
 }
