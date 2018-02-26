@@ -32,6 +32,7 @@ public class A3Q3 {
                 karel.move();
             }
             karel.putThing();
+            // make karel turn around to plant another row of seeds
             karel.turnAround();
             karel.move(4);
             karel.turnLeft();
