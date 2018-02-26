@@ -72,7 +72,5 @@ public class A3Q4 {
             karel.move(3);
         }
 
-
-
     }
 }
