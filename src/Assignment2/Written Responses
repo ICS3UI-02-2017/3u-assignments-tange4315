@@ -7,3 +7,5 @@
 1.g) true
 
 2. They behave the same way because they are essentially the same, but they are in a different order.
+   The first one makes karel turn right if he can pick up a thing, and left when he can't.
+   The second one makes karel turns left if it can't pick up a thing, and right when he can.
