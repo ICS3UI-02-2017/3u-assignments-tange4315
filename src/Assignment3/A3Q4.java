@@ -59,7 +59,7 @@ public class A3Q4 {
         new Wall(kw, 5, 5, Direction.SOUTH);
         new Wall(kw, 5, 4, Direction.SOUTH);
         new Wall(kw, 5, 4, Direction.WEST);
-        
+
         // make karel walk around all four blocks
         for (int walkAroundBlocks = 0; walkAroundBlocks < 4; walkAroundBlocks++) {
             // make karel walk around 3 sides of a block
