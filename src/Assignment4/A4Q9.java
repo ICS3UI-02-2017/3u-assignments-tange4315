@@ -57,6 +57,7 @@ public class A4Q9 extends javax.swing.JFrame {
             }
         });
 
+        resultTextField.setEditable(false);
         resultTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resultTextFieldActionPerformed(evt);
@@ -150,39 +151,87 @@ public class A4Q9 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void firstNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNumberTextFieldActionPerformed
-        
+
     }//GEN-LAST:event_firstNumberTextFieldActionPerformed
 
     private void secondNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondNumberTextFieldActionPerformed
-        
+
     }//GEN-LAST:event_secondNumberTextFieldActionPerformed
 
     private void resultTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultTextFieldActionPerformed
-        
+
     }//GEN-LAST:event_resultTextFieldActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-        
+
         // get text from number text fields
         String firstNumberString = firstNumberTextField.getText();
         String secondNumberString = secondNumberTextField.getText();
-        
+
         // convert number text fields into integers
         double firstNumber = Integer.parseInt(firstNumberString);
         double secondNumber = Integer.parseInt(secondNumberString);
-        
+
+        // add two numbers together
+        double result = firstNumber + secondNumber;
+
+        // output result to user
+        resultTextField.setText(result);
+
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void subButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subButtonActionPerformed
-        // TODO add your handling code here:
+
+        // get text from number text fields
+        String firstNumberString = firstNumberTextField.getText();
+        String secondNumberString = secondNumberTextField.getText();
+
+        // convert number text fields into integers
+        double firstNumber = Integer.parseInt(firstNumberString);
+        double secondNumber = Integer.parseInt(secondNumberString);
+
+        // subtract first number by second number
+        double result = firstNumber - secondNumber;
+
+        // output result to user
+        resultTextField.setText(result);
+
     }//GEN-LAST:event_subButtonActionPerformed
 
     private void mulButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mulButtonActionPerformed
-        // TODO add your handling code here:
+
+        // get text from number text fields
+        String firstNumberString = firstNumberTextField.getText();
+        String secondNumberString = secondNumberTextField.getText();
+
+        // convert number text fields into integers
+        double firstNumber = Integer.parseInt(firstNumberString);
+        double secondNumber = Integer.parseInt(secondNumberString);
+
+        // multiply two numbers by eachother
+        double result = firstNumber * secondNumber;
+
+        // output result to user
+        resultTextField.setText(result);
+
     }//GEN-LAST:event_mulButtonActionPerformed
 
     private void divButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_divButtonActionPerformed
-        // TODO add your handling code here:
+
+        // get text from number text fields
+        String firstNumberString = firstNumberTextField.getText();
+        String secondNumberString = secondNumberTextField.getText();
+
+        // convert number text fields into integers
+        double firstNumber = Integer.parseInt(firstNumberString);
+        double secondNumber = Integer.parseInt(secondNumberString);
+
+        // divide first number by second number
+        double result = firstNumber / secondNumber;
+
+        // output result to user
+        resultTextField.setText(result);
+
     }//GEN-LAST:event_divButtonActionPerformed
 
     /**
