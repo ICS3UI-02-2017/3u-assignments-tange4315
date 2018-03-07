@@ -151,15 +151,12 @@ public class A4Q9 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void firstNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNumberTextFieldActionPerformed
-
     }//GEN-LAST:event_firstNumberTextFieldActionPerformed
 
     private void secondNumberTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_secondNumberTextFieldActionPerformed
-
     }//GEN-LAST:event_secondNumberTextFieldActionPerformed
 
     private void resultTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultTextFieldActionPerformed
-
     }//GEN-LAST:event_resultTextFieldActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
@@ -176,7 +173,7 @@ public class A4Q9 extends javax.swing.JFrame {
         double result = firstNumber + secondNumber;
 
         // output result to user
-        resultTextField.setText(result);
+        resultTextField.setText("" + result);
 
     }//GEN-LAST:event_addButtonActionPerformed
 
@@ -194,7 +191,7 @@ public class A4Q9 extends javax.swing.JFrame {
         double result = firstNumber - secondNumber;
 
         // output result to user
-        resultTextField.setText(result);
+        resultTextField.setText("" + result);
 
     }//GEN-LAST:event_subButtonActionPerformed
 
@@ -212,7 +209,7 @@ public class A4Q9 extends javax.swing.JFrame {
         double result = firstNumber * secondNumber;
 
         // output result to user
-        resultTextField.setText(result);
+        resultTextField.setText("" + result);
 
     }//GEN-LAST:event_mulButtonActionPerformed
 
@@ -230,7 +227,7 @@ public class A4Q9 extends javax.swing.JFrame {
         double result = firstNumber / secondNumber;
 
         // output result to user
-        resultTextField.setText(result);
+        resultTextField.setText("" + result);
 
     }//GEN-LAST:event_divButtonActionPerformed
 

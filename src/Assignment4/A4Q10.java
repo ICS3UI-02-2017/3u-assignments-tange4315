@@ -110,31 +110,47 @@ public class A4Q10 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void degreesFahrenheitTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_degreesFahrenheitTextFieldActionPerformed
-
     }//GEN-LAST:event_degreesFahrenheitTextFieldActionPerformed
 
     private void degreesCelsiusTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_degreesCelsiusTextFieldActionPerformed
-
     }//GEN-LAST:event_degreesCelsiusTextFieldActionPerformed
 
     private void celsiusConvertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_celsiusConvertButtonActionPerformed
 
-        // get temperature in fahrenheit from  fahrenheit text field
+        // get temperature in fahrenheit from text field
         String fahrenheitString = degreesFahrenheitTextField.getText();
-
-        // convert fahrenheit string into an integer
-        int fahrenheit = Integer.parseInt(fahrenheitString);
-
+        
+        // convert string into integer
+        double fahrenheit = Integer.parseInt(fahrenheitString);
+        
         // convert fahrenheit into celsius
-        double celsius = (fahrenheit - 32) * (5 / 9);
-
-        // output temperature in celsius
-        degreesFahrenheitTextField.setText = (celsius);
+        double celsius = (fahrenheit - 32) * (5.0/9);
+        
+        // round number
+        celsius = Math.round(celsius);
+        
+        // output temperature in celsius to user
+        degreesFahrenheitTextField.setText ("" + celsius);
 
     }//GEN-LAST:event_celsiusConvertButtonActionPerformed
 
     private void fahrenheitConvertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fahrenheitConvertButtonActionPerformed
-        // TODO add your handling code here:
+        
+        // get temperature in celsius from text field
+        String celsiusString = degreesCelsiusTextField.getText();
+        
+        // convert string into integer
+        double celsius = Integer.parseInt(celsiusString);
+        
+        // convert celsius into fahrenheit
+        double fahrenheit = celsius * (9.0/5) + 32;
+        
+        // round number
+        fahrenheit = Math.round(fahrenheit);
+        
+        // output temperature in fahrenheit to user
+        degreesCelsiusTextField.setText ("" + fahrenheit);
+        
     }//GEN-LAST:event_fahrenheitConvertButtonActionPerformed
 
     /**
@@ -171,7 +187,6 @@ public class A4Q10 extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton celsiusConvertButton;
     private javax.swing.JTextField degreesCelsiusTextField;
