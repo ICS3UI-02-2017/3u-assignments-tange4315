@@ -19,11 +19,13 @@ public class A4Q7 {
 
         // create a Scanner to read information
         Scanner input = new Scanner(System.in);
-
-        // snakes and ladders starts on square one
-        int square = 1;
-
-        while (square < 100) {
+        
+        // snakes and ladders begins on square 1
+        int currentSquare = 1;
+        int previousSquare = 1;
+        
+        // game continues until user reaches square 100
+        while (currentSquare < 100) {
             
             // ask user what sum of dice is
             System.out.println("Enter sum of dice: ");
@@ -34,41 +36,46 @@ public class A4Q7 {
                 System.out.println("You Quit!");
                 System.exit(0);
             }
-
-            // find out which square user is on
-            square = square + sumOfDice;
-
-            // tell user to input sum of dice again if the square on board will be over 100
-            if (square > 100) {
+            
+            // find out what square user is currently on
+            currentSquare = currentSquare + sumOfDice;
+            
+            // user cannot go over square 100
+            while (currentSquare > 100) {
+                currentSquare = previousSquare;
                 System.out.println("Enter sum of dice: ");
                 sumOfDice = input.nextInt();
+                currentSquare = currentSquare + sumOfDice;
+                System.out.println("You are now on square " + currentSquare);
             }
-
+            
             // find out if user can go down a snake
-            if (square == 54) {
-                square = 19;
-            } else if (square == 90) {
-                square = 48;
-            } else if (square == 99) {
-                square = 77;
+            if (currentSquare == 54) {
+                currentSquare = 19;
+            } else if (currentSquare == 90) {
+                currentSquare = 48;
+            } else if (currentSquare == 99) {
+                currentSquare = 77;
             }
-
+            
             // find out if user can go up a ladder
-            if (square == 9) {
-                square = 34;
-            } else if (square == 40) {
-                square = 64;
-            } else if (square == 67) {
-                square = 86;
+            if (currentSquare == 9) {
+                currentSquare = 34;
+            } else if (currentSquare == 40) {
+                currentSquare = 64;
+            } else if (currentSquare == 67) {
+                currentSquare = 86;
             }
-
+            
             // tell user which square they are on
-            System.out.println("You are now on " + square);
-
-            // tell user when they have won snakes and ladders
-            if (square == 100) {
+            System.out.println("You are now on " + currentSquare);
+            
+            // tell user if they have won
+            if (currentSquare == 100) {
                 System.out.println("You Win!");
             }
+            
+            previousSquare = currentSquare;
             
         }
 
