@@ -33,53 +33,48 @@ public class A5Q1 {
             // find the length of the word
             int length = origWord.length();
 
-            // store the translated word and individual letters in a variable;
+            // store the translated word in a variable
             String transWord = "";
-            String letter = "";
 
             // go through each letter of the word individually to detect vowels
             for (int i = 0; i < length; i++) {
 
                 // ignore if letter is a consonant
                 if (origWord.charAt(i) != 'a'
-                        || origWord.charAt(i) != 'e'
-                        || origWord.charAt(i) != 'i'
-                        || origWord.charAt(i) != 'o'
-                        || origWord.charAt(i) != 'u') {
+                        && origWord.charAt(i) != 'e'
+                        && origWord.charAt(i) != 'i'
+                        && origWord.charAt(i) != 'o'
+                        && origWord.charAt(i) != 'u') {
                     // add letter to translated word
-                    letter = origWord.substring(i, i);
-                    transWord = transWord + letter;
+                    transWord = transWord + origWord.charAt(i);
                 } else {
                     // add ub before a singular vowel
-                    letter = origWord.substring(i, i);
-                    transWord = transWord + "ub" + letter;
+                    transWord = transWord + "ub" + origWord.charAt(i);
                 }
-                
-                // don't add ub if next letter is a vowel
-                if (origWord.charAt(i + 1) == 'a'
-                        || origWord.charAt(i + 1) == 'e'
-                        || origWord.charAt(i + 1) == 'i'
-                        || origWord.charAt(i + 1) == 'o'
-                        || origWord.charAt(i + 1) == 'u') {
-                    // add letter to translated word
-                    letter = origWord.substring(i, i);
-                    transWord = transWord + letter;
-                    // don't add ub if next letter is a vowel
-                    if (origWord.charAt(i + 2) == 'a'
-                            || origWord.charAt(i + 2) == 'e'
-                            || origWord.charAt(i + 2) == 'i'
-                            || origWord.charAt(i + 2) == 'o'
-                            || origWord.charAt(i + 2) == 'u') {
-                        // add letter to translated word
-                        letter = origWord.substring(i, i);
-                        transWord = transWord + letter;
-                    }
-                }
+
+//                // don't add ub if next letter is a vowel
+//                if (origWord.charAt(i + 1) == 'a'
+//                        || origWord.charAt(i + 1) == 'e'
+//                        || origWord.charAt(i + 1) == 'i'
+//                        || origWord.charAt(i + 1) == 'o'
+//                        || origWord.charAt(i + 1) == 'u') {
+//                    // add letter to translated word
+//                    transWord = transWord + origWord.indexOf(i + 1);
+//                    // don't add ub if next letter is a vowel
+//                    if (origWord.charAt(i + 2) == 'a'
+//                            || origWord.charAt(i + 2) == 'e'
+//                            || origWord.charAt(i + 2) == 'i'
+//                            || origWord.charAt(i + 2) == 'o'
+//                            || origWord.charAt(i + 2) == 'u') {
+//                        // add letter to translated word
+//                        transWord = transWord + origWord.indexOf(i + 2);
+//                    }
+//                }
             }
+
+            // tell user their translated word
+            System.out.println(origWord + " in Ubbi Dubbi is " + transWord + ".");
+
         }
-
-         // tell user their translated word
-         System.out.println(transWord);
-
     }
 }
