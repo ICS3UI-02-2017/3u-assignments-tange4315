@@ -45,36 +45,24 @@ public class A5Q1 {
                         && origWord.charAt(i) != 'i'
                         && origWord.charAt(i) != 'o'
                         && origWord.charAt(i) != 'u') {
-                    // add letter to translated word
+                    // add consonant to translated word
                     transWord = transWord + origWord.charAt(i);
                 } else {
                     // add ub before a singular vowel
                     transWord = transWord + "ub" + origWord.charAt(i);
                 }
 
-//                // don't add ub if next letter is a vowel
-//                if (origWord.charAt(i + 1) == 'a'
-//                        || origWord.charAt(i + 1) == 'e'
-//                        || origWord.charAt(i + 1) == 'i'
-//                        || origWord.charAt(i + 1) == 'o'
-//                        || origWord.charAt(i + 1) == 'u') {
-//                    // add letter to translated word
-//                    transWord = transWord + origWord.indexOf(i + 1);
-//                    // don't add ub if next letter is a vowel
-//                    if (origWord.charAt(i + 2) == 'a'
-//                            || origWord.charAt(i + 2) == 'e'
-//                            || origWord.charAt(i + 2) == 'i'
-//                            || origWord.charAt(i + 2) == 'o'
-//                            || origWord.charAt(i + 2) == 'u') {
-//                        // add letter to translated word
-//                        transWord = transWord + origWord.indexOf(i + 2);
-//                    }
-//                }
+                // check to see if next letter is a vowel
+                
+                
             }
 
             // tell user their translated word
             System.out.println(origWord + " in Ubbi Dubbi is " + transWord + ".");
+            System.out.println("");
 
         }
+
     }
+    
 }
