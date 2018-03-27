@@ -36,9 +36,9 @@ public class A5Q1 {
             // store the translated word in a variable
             String transWord = "";
 
-            // go through each letter of the word individually to detect vowels
+            // walk through each letter of the word individually to detect vowels
             for (int i = 0; i < length; i++) {
-
+                
                 // ignore if letter is a consonant
                 if (origWord.charAt(i) != 'a'
                         && origWord.charAt(i) != 'e'
