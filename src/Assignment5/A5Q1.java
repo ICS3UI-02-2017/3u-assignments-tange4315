@@ -7,6 +7,7 @@ package Assignment5;
 import java.util.Scanner;
 
 /**
+ * English to Ubbi Dubbi Translator
  *
  * @author tange4315
  */
@@ -36,25 +37,69 @@ public class A5Q1 {
             // store the translated word in a variable
             String transWord = "";
 
-            // walk through each letter of the word individually to detect vowels
+            // walk through each letter of the word to individually detect vowels
             for (int i = 0; i < length; i++) {
-                
-                // ignore if letter is a consonant
-                if (origWord.charAt(i) != 'a'
-                        && origWord.charAt(i) != 'e'
-                        && origWord.charAt(i) != 'i'
-                        && origWord.charAt(i) != 'o'
-                        && origWord.charAt(i) != 'u') {
-                    // add consonant to translated word
-                    transWord = transWord + origWord.charAt(i);
+
+                // detect singular vowels and abb ub before
+                if (origWord.charAt(i) == 'a'
+                        || origWord.charAt(i) == 'e'
+                        || origWord.charAt(i) == 'i'
+                        || origWord.charAt(i) == 'o'
+                        || origWord.charAt(i) == 'u') {
+                    // add ub and singular vowel to translated word variable
+                    transWord += "ub" + origWord.charAt(i);
+
+                    // detect consecutive vowels but don't exceed original word length
+                    if (i + 1 < length) {
+
+                        // detect double vowels
+                        if (origWord.charAt(i + 1) == 'a'
+                                || origWord.charAt(i + 1) == 'e'
+                                || origWord.charAt(i + 1) == 'i'
+                                || origWord.charAt(i + 1) == 'o'
+                                || origWord.charAt(i + 1) == 'u') {
+                            // add second consecutive vowel to translated word variable
+                            transWord += origWord.charAt(i + 1);
+                            
+                            // detect consecutive vowels but don't exceed original word length
+                            if (i + 2 < length) {
+                                
+                                // detect triple vowels
+                                if (origWord.charAt(i + 2) == 'a' ||
+                                        origWord.charAt(i + 2) == 'e' ||
+                                        origWord.charAt(i + 2) == 'i' ||
+                                        origWord.charAt(i + 2) == 'o' ||
+                                        origWord.charAt(i + 2) == 'u') {
+                                    // add third consecutive vowel to translated word variable
+                                    transWord += origWord.charAt(i + 2);
+                                    
+                                    // move onto next letter
+                                    i++;
+                                    
+                                    // do not exceed length of original word
+                                    if (i + 2 >= length) {
+                                        break;
+                                    }
+                                }
+                                
+                            }
+                            
+                            // move onto next letter
+                            i++;
+
+                            // do not exceed length of original word
+                            if (i + 1 >= length) {
+                                break;
+                            }
+                        }
+
+                    }
+
                 } else {
-                    // add ub before a singular vowel
-                    transWord = transWord + "ub" + origWord.charAt(i);
+                    // add consonant to translated word varible
+                    transWord += origWord.charAt(i);
                 }
 
-                // check to see if next letter is a vowel
-                
-                
             }
 
             // tell user their translated word
@@ -64,5 +109,4 @@ public class A5Q1 {
         }
 
     }
-    
 }
