@@ -119,38 +119,38 @@ public class A4Q10 extends javax.swing.JFrame {
 
         // get temperature in fahrenheit from text field
         String fahrenheitString = degreesFahrenheitTextField.getText();
-        
+
         // convert string into integer
         double fahrenheit = Integer.parseInt(fahrenheitString);
-        
+
         // convert fahrenheit into celsius
-        double celsius = (fahrenheit - 32) * (5.0/9);
-        
+        double celsius = (fahrenheit - 32) * (5.0 / 9);
+
         // round number
         celsius = Math.round(celsius);
-        
+
         // output temperature in celsius to user
-        degreesFahrenheitTextField.setText ("" + celsius);
+        degreesFahrenheitTextField.setText("" + celsius);
 
     }//GEN-LAST:event_celsiusConvertButtonActionPerformed
 
     private void fahrenheitConvertButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fahrenheitConvertButtonActionPerformed
-        
+
         // get temperature in celsius from text field
         String celsiusString = degreesCelsiusTextField.getText();
-        
+
         // convert string into integer
         double celsius = Integer.parseInt(celsiusString);
-        
+
         // convert celsius into fahrenheit
-        double fahrenheit = celsius * (9.0/5) + 32;
-        
+        double fahrenheit = celsius * (9.0 / 5) + 32;
+
         // round number
         fahrenheit = Math.round(fahrenheit);
-        
+
         // output temperature in fahrenheit to user
-        degreesCelsiusTextField.setText ("" + fahrenheit);
-        
+        degreesCelsiusTextField.setText("" + fahrenheit);
+
     }//GEN-LAST:event_fahrenheitConvertButtonActionPerformed
 
     /**
