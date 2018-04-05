@@ -7,7 +7,6 @@ package Assignment5;
 import java.util.Scanner;
 
 /**
- * English to Ubbi Dubbi Translator
  *
  * @author tange4315
  */
@@ -73,7 +72,7 @@ public class A5Q1 {
                                     // add third consecutive vowel to translated word variable
                                     transWord += origWord.charAt(i + 2);
                                     
-                                    // move onto next letter
+                                    // move onto next letter after triple vowel
                                     i++;
                                     
                                     // do not exceed length of original word
@@ -84,7 +83,7 @@ public class A5Q1 {
                                 
                             }
                             
-                            // move onto next letter
+                            // move onto next letter after double vowel
                             i++;
 
                             // do not exceed length of original word
