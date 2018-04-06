@@ -23,9 +23,32 @@ public class A6Q1 {
         // ask user how many students there are in the class
         System.out.println("How many students are in the class? ");
         int numberOfStudents = input.nextInt();
+
+        // make an array to store the marks
+        double marks[] = new double[numberOfStudents];
         
         // ask user to enter marks
         System.out.println("Enter the marks: ");
+        for (int i = 0; i < marks.length; i++) {
+            marks[i] = input.nextDouble();
+        }
+        
+        System.out.println("");
+        
+        // add marks
+        double average = 0;
+        for (int i = 0; i < marks.length; i++) {
+            average += marks[i];
+        }
+        
+        // calculate average
+        average = average / numberOfStudents;
+        
+        // round average to the nearest hundreth
+        average = (Math.round(average * 100.0) / 100.0);
+        
+        // tell user the average
+        System.out.println("The class average is " + average + "%.");
         
     }
 }
