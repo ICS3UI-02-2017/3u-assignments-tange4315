@@ -42,9 +42,10 @@ public class A6Q2 {
         }
         double average = sum / numberOfPeople;
         
-        // determine amount of people over average
+        // find people's height who are above their group's average
         for (int i = 0; i < heights.length; i++) {
             if (heights[i] > average) {
+                // tell user the people's height that are above average
                 System.out.println(heights[i] + " cm is above average in this group.");
             }
         }
