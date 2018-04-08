@@ -33,16 +33,36 @@ public class A6Q5 {
             marks[i] = input.nextInt();
         }
         
-        // sort array in ascending order
+        // create variable to temporarily store marks in
+        int temporary = 0;
         
-        // calculate median
+        // do not exceed array length when sorting marks
+        for (int i = 0; i < marks.length - 1; i++) {
+            // do not sort items that have been previously sorted
+            for (int j = 0; j < marks.length - 1 - i; j++) {
+                // switch places if current integer is higher than next integer
+                if (marks[j] > marks[j + 1]) {
+                    temporary = marks[j];
+                    marks[j] = marks[j + 1];
+                    marks[j + 1] = temporary;
+                }
+            }
+        }
+        
+        // calculate median if there are an even number of slots in array
         if (marks.length - marks.length == 1) {
-            int half = marks.length / 2;
-            
+            // find halfway point in array
+            double half = marks.length / 2;
+            // find two points that make up the middle
+            double lowMedian = Math.floor(half);
+            double highMedian = Math.ceil(half);
+            double median = (lowMedian + highMedian) / 2;
+            // round median to nearest hundreth
+            median = (Math.round(median * 100.00) / 100.00);
         }
         
         // tell user the median of the class
-        System.out.println("The median is ");
+        System.out.println(median);
         
     }
 }

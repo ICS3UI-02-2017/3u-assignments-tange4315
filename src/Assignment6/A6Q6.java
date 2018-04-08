@@ -33,9 +33,27 @@ public class A6Q6 {
             marks[i] = input.nextInt();
         }
         
-        // calculate lowest mark
+        // create variable to temporarily store marks in
+        int temporary = 0;
         
-        // calculate highest mark
+        // do not exceed array length when sorting marks
+        for (int i = 0; i < marks.length - 1; i++) {
+            // do not sort items that have been previously sorted
+            for (int j = 0; j < marks.length - 1 - i; j++) {
+                // switch places if current integer is higher than next integer
+                if (marks[j] > marks[j + 1]) {
+                    temporary = marks[j];
+                    marks[j] = marks[j + 1];
+                    marks[j + 1] = temporary;
+                }
+            }
+        }
+        
+        // find lowest mark
+        int lowestMark = marks[0];
+        
+        // find highest mark
+        int highestMark = marks[marks.length];
         
         // add all marks together
         double sum = 0;
@@ -50,7 +68,7 @@ public class A6Q6 {
         average = (Math.round (average * 100.0) / 100.00);
         
         // tell user the lowest mark, highest mark, and average
-        System.out.println("The lowest mark is");
+        System.out.println("The lowest mark is " + lowestMark + ", the highest mark is " + highestMark + ", and the average is " + average + ".");
         
     }
 }

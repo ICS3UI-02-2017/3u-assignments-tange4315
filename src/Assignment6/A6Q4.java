@@ -29,8 +29,27 @@ public class A6Q4 {
             marks[i] = input.nextInt();
         }
         
-        // sort in ascending order
+        // create variable to temporarily store marks in
+        int temporary = 0;
         
+        // do not exceed array length when sorting marks
+        for (int i = 0; i < marks.length - 1; i++) {
+            // do not sort items that have been previously sorted
+            for (int j = 0; j < marks.length - 1 - i; j++) {
+                // switch places if current integer is higher than next integer
+                if (marks[j] > marks[j + 1]) {
+                    temporary = marks[j];
+                    marks[j] = marks[j + 1];
+                    marks[j + 1] = temporary;
+                }
+            }
+        }
+        
+        // tell user the marks in ascending order
+        System.out.print("The marks in ascending order are: ");
+        for (int i = 0; i < marks.length; i++) {
+            System.out.print(marks[i] + " ");
+        }
         
     }
 }
