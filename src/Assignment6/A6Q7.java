@@ -4,6 +4,8 @@
  */
 package Assignment6;
 
+import java.util.Scanner;
+
 /**
  *
  * @author tange4315
@@ -14,6 +16,11 @@ public class A6Q7 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        // create a Scanner to read information
+        Scanner input = new Scanner(System.in);
+        
+        // do something
+        
     }
 }

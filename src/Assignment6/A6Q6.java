@@ -53,7 +53,7 @@ public class A6Q6 {
         int lowestMark = marks[0];
         
         // find highest mark
-        int highestMark = marks[marks.length];
+        int highestMark = marks[marks.length - 1];
         
         // add all marks together
         double sum = 0;
