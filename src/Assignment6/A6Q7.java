@@ -20,7 +20,24 @@ public class A6Q7 {
         // create a Scanner to read information
         Scanner input = new Scanner(System.in);
         
+        // create an array to represent numbers 0 to 1000
+        int numbers[] = new int[1001];
+        
+        // fill array with corresponding numbers
+        for (int i = 0; i < numbers.length; i++) {
+            numbers[i] = i;
+        }
+        
+        // create an array to store booleans to determine prime numbers
+        boolean prime[] = new boolean[1001];
+        
+        // assume all numbers are prime
+        for (int i = 0; i < prime.length; i++) {
+            prime[i] = true;
+        }
+        
         // do something
+         
         
     }
 }
