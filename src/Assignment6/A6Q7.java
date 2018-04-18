@@ -23,7 +23,7 @@ public class A6Q7 {
         // create an array to represent numbers 0 to 1000
         int numbers[] = new int[1001];
         
-        // fill array with corresponding numbers
+        // fill the array with consecutive integers
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = i;
         }
@@ -36,8 +36,24 @@ public class A6Q7 {
             prime[i] = true;
         }
         
-        // do something
-         
+        for (int p = 2; p < numbers.length; p++) {
+            // go through array and look for prime numbers
+            for (int i = 0; i < numbers.length; i++) {
+                // mark all composite numbers
+                if (numbers[i] % p == 0) {
+                    prime[i] = false;
+                }
+            }
+        }
+        
+        // tell user the prime numbers
+        System.out.println("The prime numbers throughout 2 to 1000 are: ");
+        
+        for (int i = 0; i < 10; i++) {
+            if (prime[i] == true) {
+                System.out.print(prime[i] + " ");
+            }
+        }
         
     }
 }
