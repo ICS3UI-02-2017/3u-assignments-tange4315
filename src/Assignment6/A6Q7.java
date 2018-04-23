@@ -15,6 +15,7 @@ public class A6Q7 {
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String[] args) {
 
         // create a Scanner to read information
@@ -37,24 +38,26 @@ public class A6Q7 {
         }
 
         // initially let p equal 2 which is the first prime number
-        for (int p = 2; p < numbers.length; p++) {
-            // go through array and look for composite numbers
-            for (int i = 0; i < numbers.length; i++) {
-                // mark all composite numbers in array
-                if (numbers[i] % p == 0) {
-                    prime[i] = false;
-                }
-                // do not let p equal anything that's marked as a composite number
-                for (int j = p; j < numbers.length; j++) {
-                    if (prime[j] == false){
-                        j++;
-                    } else {
-                        p = numbers[j];
-                    }
+        int p = 2;
+
+        // go through numbers array looking for prime numbers
+        for (int i = 0; i < numbers.length; i++) {
+            if (numbers[i] % p == 0) {
+                // mark composite numbers
+                prime[i] = false;
+            }
+            // make p equal an unmarked number
+            for (p = i; p < numbers.length; p++) {
+                // if a composite number, find a prime number
+                if (prime[p] == true) {
+                    p++;
+                    // mark p as an unmarked prime number
+                } else {
+                    p = numbers[p];
                 }
             }
         }
-        
+
         // tell user the prime numbers
         System.out.println("The prime numbers throughout 2 to 1000 are: ");
 
