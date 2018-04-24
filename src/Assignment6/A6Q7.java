@@ -66,5 +66,6 @@ public class A6Q7 {
                 System.out.print(numbers[i] + " ");
             }
         }
+        
     }
 }
