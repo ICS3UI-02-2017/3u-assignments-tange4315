@@ -41,17 +41,16 @@ public class A6Q7 {
         int p = 2;
 
         // go through numbers array looking for prime numbers
-        for (int i = 0; i < numbers.length; i++) {
+        for (int i = 0; i < numbers.length - 1; i++) {
             if (numbers[i] % p == 0) {
                 // mark composite numbers
                 prime[i] = false;
             }
             // make p equal an unmarked number
-            for (p = i; p < numbers.length; p++) {
-                // if a composite number, find a prime number
+            for (p = i; p < numbers.length - 1; p++) {
+                // find an unmarked number to make p
                 if (prime[p] == true) {
                     p++;
-                    // mark p as an unmarked prime number
                 } else {
                     p = numbers[p];
                 }
