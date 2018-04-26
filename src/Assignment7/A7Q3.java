@@ -14,44 +14,29 @@ public class A7Q3 {
      * @param args the command line arguments
      */
     
+    // create a method to find numbers that are divisible by a given factor
     public static void factors(int factor) {
-        
+   
         // create an array to store numbers
         int numbers[] = new int[factor + 1];
-        
-        // fill array with numbers from 0 to the given factor
-        for (int i = 0; i < factor + 1; i++) {
+        // fill the array with numbers from 0 to the factor
+        for (int i = 0; i < numbers.length; i++) {
             numbers[i] = i;
         }
         
-        // create an array to store boolean values to mark divisible numbers
-        boolean divisible[] = new boolean[numbers.length];
-        
-        // assume all numbers are divisible by the factor
-        for (int i = 0; i < divisible.length; i++) {
-            divisible[i] = true;
-        }
-        
-        // go through numbers array and find things that are not divisible by the factor
-        for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] % factor != 0) {
-                // mark numbers that are not divisible by the factor
-                divisible[i] = false;
-            }
-        }
-        
         // tell user the numbers that are divisible by the factor
-        System.out.println("The numbers that are divisible by " + factor + " are: ");
+        System.out.println("The numbers from 0 to " + factor + " that are divisible by " + factor + " are: ");
         
-        for (int i = 0; i < numbers.length; i++) {
-            if (divisible[i] == false) {
+        // go through the array and locate numbers that are divisible by the factor
+        for (int i = 1; i < numbers.length; i++) {
+            if (factor % numbers[i] == 0) {
+                // print numbers that are divisible by the factor
                 System.out.print(numbers[i] + " ");
-            }
+            } 
         }
-        
     }
     
     public static void main(String[] args) {
-        factors(10);
+        factors(30);
     }
 }

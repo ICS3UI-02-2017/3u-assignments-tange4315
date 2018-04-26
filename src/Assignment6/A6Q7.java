@@ -23,7 +23,6 @@ public class A6Q7 {
 
         // create an array to represent numbers 0 to 1000
         int numbers[] = new int[1001];
-
         // fill the array with consecutive integers
         for (int i = 0; i < numbers.length; i++) {
             numbers[i] = i;
@@ -31,7 +30,6 @@ public class A6Q7 {
 
         // create an array to store booleans to determine prime numbers
         boolean prime[] = new boolean[1001];
-
         // assume all numbers are prime
         for (int i = 0; i < prime.length; i++) {
             prime[i] = true;
@@ -41,13 +39,13 @@ public class A6Q7 {
         int p = 2;
 
         // go through numbers array looking for prime numbers
-        for (int i = 0; i < numbers.length - 1; i++) {
+        for (int i = 1; i < numbers.length - 1; i++) {
             if (numbers[i] % p == 0) {
                 // mark composite numbers
                 prime[i] = false;
             }
             // make p equal an unmarked number
-            for (p = i; p < numbers.length - 1; p++) {
+            for (p = i; p < numbers.length; p++) {
                 // find an unmarked number to make p
                 if (prime[p] == true) {
                     p++;
