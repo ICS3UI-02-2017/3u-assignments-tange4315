@@ -60,9 +60,9 @@ public class A6Q7 {
 
         for (int i = 0; i < numbers.length; i++) {
             if (prime[i] == true) {
+                // print numbers on the same line
                 System.out.print(numbers[i] + " ");
             }
         }
-        
     }
 }
