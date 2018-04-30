@@ -15,7 +15,6 @@ public class A6Q7 {
     /**
      * @param args the command line arguments
      */
-    
     public static void main(String[] args) {
 
         // create a Scanner to read information
@@ -35,23 +34,11 @@ public class A6Q7 {
             prime[i] = true;
         }
 
-        // initially let p equal 2 which is the first prime number
-        int p = 2;
-
         // go through numbers array looking for prime numbers
-        for (int i = 1; i < numbers.length - 1; i++) {
-            if (numbers[i] % p == 0) {
-                // mark composite numbers
-                prime[i] = false;
-            }
-            // make p equal an unmarked number
-            for (p = i; p < numbers.length; p++) {
-                // find an unmarked number to make p
-                if (prime[p] == true) {
-                    p++;
-                } else {
-                    p = numbers[p];
-                }
+        for (int p = 2; p * p <= numbers.length; p++) {
+            // mark composite numbers
+            if (numbers[p] % p == 0) {
+                prime[p] = false;
             }
         }
 
