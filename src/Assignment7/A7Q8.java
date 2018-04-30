@@ -15,7 +15,7 @@ public class A7Q8 {
      */
     
     // create a method that returns whether every digit of a positive integer is odd
-    public static boolean allDigitsOdd(int number) {
+    public static void allDigitsOdd(int number) {
         
     }
     

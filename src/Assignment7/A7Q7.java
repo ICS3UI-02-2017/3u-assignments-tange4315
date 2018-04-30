@@ -16,10 +16,19 @@ public class A7Q7 {
     
     // create a method that returns the first digit of an integer
     public static int firstDigit(int number) {
-        
+        // get rid of the negative sign if the number is negative
+        if (number < 0) {
+            number = number * -1;
+        }
+        // keep on removing the last digit of the number until only one digit is left
+        while (number >= 10) {
+            number /= 10;
+        }
+        // return the first digit
+        return number;
     }
     
     public static void main(String[] args) {
-        // TODO code application logic here
+        firstDigit(-123);
     }
 }

@@ -20,35 +20,33 @@ public class A6Q7 {
         // create a Scanner to read information
         Scanner input = new Scanner(System.in);
 
-        // create an array to represent numbers 0 to 1000
-        int numbers[] = new int[1001];
-        // fill the array with consecutive integers
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = i;
-        }
-
-        // create an array to store booleans to determine prime numbers
+        // create an array to represent numbers 0 to 1001 and to store boolean values
         boolean prime[] = new boolean[1001];
-        // assume all numbers are prime
-        for (int i = 0; i < prime.length; i++) {
+        // fill the array assuming all numbers are prime
+        for (int i = 0; i < 1000; i++) {
             prime[i] = true;
         }
-
-        // go through numbers array looking for prime numbers
-        for (int p = 2; p * p <= numbers.length; p++) {
-            // mark composite numbers
-            if (numbers[p] % p == 0) {
-                prime[p] = false;
+        
+        // go through array looking for prime numbers
+        // initially let p = 2, the first prime number
+        for (int p = 2; p * p <= 1000; p++) {
+            // if prime[p] is not changed, then it is a prime
+            if (prime[p] == true) {
+                // update multiples of p
+                // do not let p equal a marked number
+                for (int i = p * 2; i <= 1000; i+= p) {
+                    prime[i] = false;
+                }
             }
         }
-
+        
         // tell user the prime numbers
-        System.out.println("The prime numbers throughout 2 to 1000 are: ");
-
-        for (int i = 0; i < numbers.length; i++) {
+        System.out.println("The prime numbers from 2 to 1000 are: ");
+        // tell user the prime numbers from 2 to 1000
+        for (int i = 2; i <= 1000; i++) {
             if (prime[i] == true) {
-                // print numbers on the same line
-                System.out.print(numbers[i] + " ");
+                // print numbers out on the same line
+                System.out.print(i + " ");
             }
         }
     }
