@@ -84,8 +84,9 @@ public class A8Q1 extends JComponent implements ActionListener {
 
         // GAME DRAWING GOES HERE
         
-        g.setColor(Color.blue);
-        g.fillRect(100, 100, 100, 100);
+        g.setColor(Color.orange);
+        g.fillOval(200, 200, 200, 200);
+        g.setColor(Color.BLACK);
 		
         // GAME DRAWING ENDS HERE
     }
