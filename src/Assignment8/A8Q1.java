@@ -18,35 +18,28 @@ import javax.swing.Timer;
  *
  * @author tange4315
  */
-
 public class A8Q1 extends JComponent implements ActionListener {
 
     // Height and Width of our game
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
-
     //Title of the window
     String title = "My Game";
-
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an approproate framerate
     int desiredFPS = 60;
     int desiredTime = Math.round((1000 / desiredFPS));
-    
     // timer used to run the game loop
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
-
     // YOUR GAME VARIABLES WOULD GO HERE
-    
-
+    Color skin = new Color(252, 213, 169);
 
     // GAME VARIABLES END HERE
-    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
-    public A8Q1(){
+    public A8Q1() {
         // creates a windows to show my game
         JFrame frame = new JFrame(title);
 
@@ -68,8 +61,8 @@ public class A8Q1 extends JComponent implements ActionListener {
         this.addMouseMotionListener(m);
         this.addMouseWheelListener(m);
         this.addMouseListener(m);
-        
-        gameTimer = new Timer(desiredTime,this);
+
+        gameTimer = new Timer(desiredTime, this);
         gameTimer.setRepeats(true);
         gameTimer.start();
     }
@@ -83,11 +76,18 @@ public class A8Q1 extends JComponent implements ActionListener {
         g.clearRect(0, 0, WIDTH, HEIGHT);
 
         // GAME DRAWING GOES HERE
-        
-        g.setColor(Color.orange);
-        g.fillOval(200, 200, 200, 200);
+
+        // make skin
+        g.setColor(skin);
+        g.fillOval(250, 150, 280, 300);
+        // make eyes
         g.setColor(Color.BLACK);
-		
+        g.fillOval(300, 250, 20, 20);
+        g.fillOval(450, 250, 20, 20);
+        // make mouth
+        g.setColor(Color.WHITE);
+        g.fillArc(300, 260, 150, 150, 180, 180);
+        
         // GAME DRAWING ENDS HERE
     }
 
@@ -95,13 +95,11 @@ public class A8Q1 extends JComponent implements ActionListener {
     // This is run before the game loop begins!
     public void preSetup() {
         // Any of your pre setup before the loop starts should go here
-
     }
 
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
-        
     }
 
     // Used to implement any of the Mouse Actions
@@ -110,25 +108,21 @@ public class A8Q1 extends JComponent implements ActionListener {
         // if a mouse button has been pressed down
         @Override
         public void mousePressed(MouseEvent e) {
-
         }
 
         // if a mouse button has been released
         @Override
         public void mouseReleased(MouseEvent e) {
-
         }
 
         // if the scroll wheel has been moved
         @Override
         public void mouseWheelMoved(MouseWheelEvent e) {
-
         }
 
         // if the mouse has moved positions
         @Override
         public void mouseMoved(MouseEvent e) {
-
         }
     }
 
@@ -138,13 +132,11 @@ public class A8Q1 extends JComponent implements ActionListener {
         // if a key has been pressed down
         @Override
         public void keyPressed(KeyEvent e) {
-
         }
 
         // if a key has been released
         @Override
         public void keyReleased(KeyEvent e) {
-
         }
     }
 
