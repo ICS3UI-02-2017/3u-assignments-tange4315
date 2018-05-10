@@ -24,10 +24,10 @@ public class A8Q1 extends JComponent implements ActionListener {
     static final int WIDTH = 800;
     static final int HEIGHT = 600;
     //Title of the window
-    String title = "My Game";
+    String title = "Face";
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
-    // you just need to select an approproate framerate
+    // you just need to select an appropriate framerate
     int desiredFPS = 60;
     int desiredTime = Math.round((1000 / desiredFPS));
     // timer used to run the game loop
@@ -35,7 +35,8 @@ public class A8Q1 extends JComponent implements ActionListener {
     Timer gameTimer;
     // YOUR GAME VARIABLES WOULD GO HERE
     Color skin = new Color(252, 213, 169);
-
+    Color purple = new Color(122, 13, 155);
+    Color green = new Color(25, 168, 10);
     // GAME VARIABLES END HERE
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
@@ -79,14 +80,22 @@ public class A8Q1 extends JComponent implements ActionListener {
 
         // make skin
         g.setColor(skin);
-        g.fillOval(250, 150, 280, 300);
+        g.fillOval(250, 170, 280, 300);
+        // make a hat
+        g.setColor(purple);
+        g.fillRect(315, 20, 150, 200);
+        g.fillOval(245, 175, 300, 50);
+        g.setColor(green);
+        g.fillRect(315, 140, 150, 40);
         // make eyes
         g.setColor(Color.BLACK);
-        g.fillOval(300, 250, 20, 20);
-        g.fillOval(450, 250, 20, 20);
+        g.fillOval(300, 270, 20, 20);
+        g.fillOval(450, 270, 20, 20);
         // make mouth
-        g.setColor(Color.WHITE);
-        g.fillArc(300, 260, 150, 150, 180, 180);
+        g.fillArc(310, 280, 150, 150, 180, 180);
+        // make teeth
+        g.fillRect(ERROR, ERROR, ERROR, ERROR);
+        g.fillRect(ERROR, ERROR, ERROR, ERROR);
         
         // GAME DRAWING ENDS HERE
     }
