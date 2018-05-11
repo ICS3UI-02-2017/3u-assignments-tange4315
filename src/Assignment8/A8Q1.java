@@ -37,9 +37,11 @@ public class A8Q1 extends JComponent implements ActionListener {
     Color skin = new Color(252, 213, 169);
     Color purple = new Color(122, 13, 155);
     Color green = new Color(25, 168, 10);
+    Color background = new Color(175, 25, 12);
     // GAME VARIABLES END HERE
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
+
     public A8Q1() {
         // creates a windows to show my game
         JFrame frame = new JFrame(title);
@@ -73,31 +75,46 @@ public class A8Q1 extends JComponent implements ActionListener {
     // NOTE: This is already double buffered!(helps with framerate/speed)
     @Override
     public void paintComponent(Graphics g) {
-        // always clear the screen first!
+        // always clear the screen first
         g.clearRect(0, 0, WIDTH, HEIGHT);
-
-        // GAME DRAWING GOES HERE
-
+        
+        // make background
+        g.setColor(background);
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+        
         // make skin
         g.setColor(skin);
-        g.fillOval(250, 170, 280, 300);
+        g.fillOval(250, 210, 280, 300);
+        
         // make a hat
         g.setColor(purple);
-        g.fillRect(315, 20, 150, 200);
-        g.fillOval(245, 175, 300, 50);
+        g.fillRect(315, 60, 150, 200);
+        g.fillOval(245, 215, 300, 50);
+        // put a stripe across the hat
         g.setColor(green);
-        g.fillRect(315, 140, 150, 40);
+        g.fillRect(315, 180, 150, 40);
+        
         // make eyes
         g.setColor(Color.BLACK);
-        g.fillOval(300, 270, 20, 20);
-        g.fillOval(450, 270, 20, 20);
-        // make mouth
-        g.fillArc(310, 280, 150, 150, 180, 180);
-        // make teeth
-        g.fillRect(ERROR, ERROR, ERROR, ERROR);
-        g.fillRect(ERROR, ERROR, ERROR, ERROR);
+        // left eye
+        g.fillOval(300, 310, 20, 20);
+        // right eye
+        g.fillOval(450, 310, 20, 20);
         
-        // GAME DRAWING ENDS HERE
+        // make mouth
+        g.setColor(Color.BLACK);
+        g.fillArc(310, 320, 150, 150, 180, 180);
+        
+        // make teeth
+        g.setColor(Color.WHITE);
+        // left tooth
+        int[] leftToothX = {355, 375, 365};
+        int[] leftToothY = {395, 395, 420};
+        g.fillPolygon(leftToothX, leftToothY, 3);
+        // right tooth
+        int[] rightToothX = {395, 415, 405};
+        int[] rightToothY = {395, 395, 420};
+        g.fillPolygon(rightToothX, rightToothY, 3);
     }
 
     // This method is used to do any pre-setup you might need to do
