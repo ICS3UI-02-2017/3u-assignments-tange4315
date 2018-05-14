@@ -33,11 +33,23 @@ public class DrawingExample extends JComponent implements ActionListener {
     // timer used to run the game loop
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
-
     // YOUR GAME VARIABLES WOULD GO HERE
+    // create background colour
     Color purple = new Color(107, 30, 132);
+    // pacman variables
+    int pacmanX = 100;
+    int pacmanY = 400;
+    int pacmanAngle = 45;
+    int pacmanRotate = 270;
+    boolean pacmanClosing = true;
+    // game controls
+    boolean moveUp = false;
+    boolean moveDown = false;
+    // mouse variables
+    int mouseX = 0;
+    int mouseY = 0;
     // GAME VARIABLES END HERE    
-            
+
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public DrawingExample() {
@@ -82,7 +94,7 @@ public class DrawingExample extends JComponent implements ActionListener {
         // set the background to purple using our custom colour variable
         g.setColor(purple);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        
+
         // set the colour
         g.setColor(Color.LIGHT_GRAY);
         // draw a filled in rectangle
@@ -103,20 +115,20 @@ public class DrawingExample extends JComponent implements ActionListener {
         // rounds the corners of a rectangle
         // (x, y, width, height, radiusWidth, radiusHeight)
         g.fillRoundRect(300, 75, 150, 50, 20, 20);
-        
+
         // draw a polygon
         // x positions for creating a triangle
-        int[] triangleX = {500, 600, 450};
+        int[] triangleX = {mouseX, 600, 450};
         // y positions for creating a triangle
-        int[] triangleY = {400, 500, 500};
+        int[] triangleY = {mouseY, 500, 500};
         // (array of x points, array of y points, number of points)
         g.fillPolygon(triangleX, triangleY, 3);
-        
+
         // set the colour for Pacman
         g.setColor(Color.YELLOW);
         // (x, y, width, height, start angle, amount to rotate angle)
-        g.fillArc(100, 400, 100, 100, 45, 270);
-        
+        g.fillArc(pacmanX, pacmanY, 100, 100, pacmanAngle, pacmanRotate);
+
         // draw a line
         g.setColor(Color.LIGHT_GRAY);
         // (x, y, x, y)
@@ -134,6 +146,37 @@ public class DrawingExample extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
+        // move pacman across the screen
+        pacmanX = pacmanX + 3;
+
+        // when pacman leaves the screen
+        if (pacmanX > WIDTH) {
+            pacmanX = -100;
+        }
+
+        // pacman mouth direction
+        if (pacmanAngle <= 0) {
+            pacmanClosing = false;
+        }
+        if (pacmanAngle >= 45) {
+            pacmanClosing = true;
+        }
+
+        // make pacman eat
+        if (pacmanClosing) {
+            pacmanAngle = pacmanAngle - 1;
+            pacmanRotate = pacmanRotate + 2;
+        } else {
+            pacmanAngle = pacmanAngle + 1;
+            pacmanRotate = pacmanRotate - 2;
+        }
+
+        // move the player
+        if (moveUp) {
+            pacmanY = pacmanY - 3;
+        } else if (moveDown) {
+            pacmanY = pacmanY + 3;
+        }
     }
 
     // Used to implement any of the Mouse Actions
@@ -142,11 +185,17 @@ public class DrawingExample extends JComponent implements ActionListener {
         // if a mouse button has been pressed down
         @Override
         public void mousePressed(MouseEvent e) {
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                System.out.println("button");
+            }
         }
 
         // if a mouse button has been released
         @Override
         public void mouseReleased(MouseEvent e) {
+            // set the mouse coordinates
+            mouseX = e.getX();
+            mouseY = e.getY();
         }
 
         // if the scroll wheel has been moved
@@ -166,6 +215,14 @@ public class DrawingExample extends JComponent implements ActionListener {
         // if a key has been pressed down
         @Override
         public void keyPressed(KeyEvent e) {
+            // get the key code
+            int keyCode = e.getKeyCode();
+            // which key is being pressed
+            if (keyCode == KeyEvent.VK_W) {
+                moveUp = true;
+            } else if (keyCode == KeyEvent.VK_S) {
+                moveDown = true;
+            }
         }
 
         // if a key has been released

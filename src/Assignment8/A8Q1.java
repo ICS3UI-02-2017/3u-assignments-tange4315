@@ -34,14 +34,25 @@ public class A8Q1 extends JComponent implements ActionListener {
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
     // YOUR GAME VARIABLES WOULD GO HERE
+    // make colours
     Color skin = new Color(252, 213, 169);
     Color purple = new Color(122, 13, 155);
     Color green = new Color(25, 168, 10);
     Color background = new Color(175, 25, 12);
+    // Y coordinates for the right tooth
+    int rightToothY1 = 395;
+    int rightToothY2 = 395;
+    int rightToothY3 = 420;
+    // X coordinates for the hat
+    int hatRectX = 315;
+    int hatOvalX = 245;
+    int stripeRectX = 315;
+    // make hat move from side to side
+    boolean hatMoveRight = true;
+
     // GAME VARIABLES END HERE
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
-
     public A8Q1() {
         // creates a windows to show my game
         JFrame frame = new JFrame(title);
@@ -77,34 +88,34 @@ public class A8Q1 extends JComponent implements ActionListener {
     public void paintComponent(Graphics g) {
         // always clear the screen first
         g.clearRect(0, 0, WIDTH, HEIGHT);
-        
+
         // make background
         g.setColor(background);
         g.fillRect(0, 0, WIDTH, HEIGHT);
-        
+
         // make skin
         g.setColor(skin);
         g.fillOval(250, 210, 280, 300);
-        
+
         // make a hat
         g.setColor(purple);
-        g.fillRect(315, 60, 150, 200);
-        g.fillOval(245, 215, 300, 50);
+        g.fillRect(hatRectX, 60, 150, 200);
+        g.fillOval(hatOvalX, 215, 300, 50);
         // put a stripe across the hat
         g.setColor(green);
-        g.fillRect(315, 180, 150, 40);
-        
+        g.fillRect(stripeRectX, 180, 150, 40);
+
         // make eyes
         g.setColor(Color.BLACK);
         // left eye
         g.fillOval(300, 310, 20, 20);
         // right eye
         g.fillOval(450, 310, 20, 20);
-        
+
         // make mouth
         g.setColor(Color.BLACK);
         g.fillArc(310, 320, 150, 150, 180, 180);
-        
+
         // make teeth
         g.setColor(Color.WHITE);
         // left tooth
@@ -113,7 +124,7 @@ public class A8Q1 extends JComponent implements ActionListener {
         g.fillPolygon(leftToothX, leftToothY, 3);
         // right tooth
         int[] rightToothX = {395, 415, 405};
-        int[] rightToothY = {395, 395, 420};
+        int[] rightToothY = {rightToothY1, rightToothY2, rightToothY3};
         g.fillPolygon(rightToothX, rightToothY, 3);
     }
 
@@ -126,6 +137,30 @@ public class A8Q1 extends JComponent implements ActionListener {
     // The main game loop
     // In here is where all the logic for my game will go
     public void gameLoop() {
+
+        // make right tooth break off
+        rightToothY1 = rightToothY1 + 2;
+        rightToothY2 = rightToothY2 + 2;
+        rightToothY3 = rightToothY3 + 2;
+
+        // make hat move from side to side
+        // determine which direction the hat should move
+        if (hatOvalX <= 295) {
+            hatMoveRight = true;
+        } else if (hatOvalX >= 195) {
+            hatMoveRight = false;
+        }
+        // make hat move to the right
+        if (hatMoveRight == true) {
+            hatRectX = hatRectX + 2;
+            hatOvalX = hatOvalX + 2;
+            stripeRectX = stripeRectX + 2;
+            // make hat move to the left
+        } else {
+            hatRectX = hatRectX - 2;
+            hatOvalX = hatOvalX - 2;
+            stripeRectX = stripeRectX - 2;
+        }
     }
 
     // Used to implement any of the Mouse Actions
