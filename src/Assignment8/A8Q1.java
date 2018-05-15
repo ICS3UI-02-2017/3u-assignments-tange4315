@@ -33,24 +33,30 @@ public class A8Q1 extends JComponent implements ActionListener {
     // timer used to run the game loop
     // this is what keeps our time running smoothly :)
     Timer gameTimer;
+    
     // YOUR GAME VARIABLES WOULD GO HERE
+    
     // make colours
     Color skin = new Color(252, 213, 169);
     Color purple = new Color(122, 13, 155);
     Color green = new Color(25, 168, 10);
     Color background = new Color(175, 25, 12);
+    
     // Y coordinates for the right tooth
     int rightToothY1 = 395;
     int rightToothY2 = 395;
     int rightToothY3 = 420;
+    // make a boolean to move the tooth
+    boolean toothFalling = true;
+    
     // X coordinates for the hat
     int hatRectX = 315;
     int hatOvalX = 245;
-    int stripeRectX = 315;
-    // make hat move from side to side
-    boolean hatMoveRight = true;
+    int hatStripeRectX = 315;
+    // make a boolean to move the hat
 
     // GAME VARIABLES END HERE
+    
     // Constructor to create the Frame and place the panel in
     // You will learn more about this in Grade 12 :)
     public A8Q1() {
@@ -99,11 +105,11 @@ public class A8Q1 extends JComponent implements ActionListener {
 
         // make a hat
         g.setColor(purple);
-        g.fillRect(hatRectX, 60, 150, 200);
-        g.fillOval(hatOvalX, 215, 300, 50);
+        g.fillRect(315, 60, 150, 200);
+        g.fillOval(245, 215, 300, 50);
         // put a stripe across the hat
         g.setColor(green);
-        g.fillRect(stripeRectX, 180, 150, 40);
+        g.fillRect(315, 180, 150, 40);
 
         // make eyes
         g.setColor(Color.BLACK);
@@ -138,29 +144,27 @@ public class A8Q1 extends JComponent implements ActionListener {
     // In here is where all the logic for my game will go
     public void gameLoop() {
 
-        // make right tooth break off
-        rightToothY1 = rightToothY1 + 2;
-        rightToothY2 = rightToothY2 + 2;
-        rightToothY3 = rightToothY3 + 2;
+        // determine whether right tooth needs to fall or go back into place
+        if (rightToothY1 <= 395) {
+            toothFalling = true;
+        } else if (rightToothY1 >= HEIGHT) {
+            toothFalling = false;
+        }
+        // make tooth fall
+        if (toothFalling == true) {
+            rightToothY1 = rightToothY1 + 2;
+            rightToothY2 = rightToothY2 + 2;
+            rightToothY3 = rightToothY3 + 2;
+        // make tooth get back into place
+        } else if (toothFalling == false) {
+            rightToothY1 = rightToothY1 - 2;
+            rightToothY2 = rightToothY2 - 2;
+            rightToothY3 = rightToothY3 - 2;
+        }
+        
+        // determine whether if hat should move left or right
+        
 
-        // make hat move from side to side
-        // determine which direction the hat should move
-        if (hatOvalX <= 295) {
-            hatMoveRight = true;
-        } else if (hatOvalX >= 195) {
-            hatMoveRight = false;
-        }
-        // make hat move to the right
-        if (hatMoveRight == true) {
-            hatRectX = hatRectX + 2;
-            hatOvalX = hatOvalX + 2;
-            stripeRectX = stripeRectX + 2;
-            // make hat move to the left
-        } else {
-            hatRectX = hatRectX - 2;
-            hatOvalX = hatOvalX - 2;
-            stripeRectX = stripeRectX - 2;
-        }
     }
 
     // Used to implement any of the Mouse Actions
