@@ -41,7 +41,7 @@ public class A8Q1 extends JComponent implements ActionListener {
     Color purple = new Color(122, 13, 155);
     Color green = new Color(25, 168, 10);
     Color background = new Color(175, 25, 12);
-    
+
     // Y coordinates for the right tooth
     int rightToothY1 = 395;
     int rightToothY2 = 395;
@@ -53,13 +53,8 @@ public class A8Q1 extends JComponent implements ActionListener {
     int hatRectX = 315;
     int hatOvalX = 245;
     int hatStripeRectX = 315;
-    // Y coordinates for the hat
-    int hatRectY = 60;
-    int hatOvalY = 215;
-    int hatStripeRectY = 180;
     // make a boolean to move the hat
     boolean hatMoveRight = true;
-    boolean hatMoveUp = true;
     
     // X coordinates for the left eye
     int leftEyeX = 300;
@@ -128,11 +123,11 @@ public class A8Q1 extends JComponent implements ActionListener {
 
         // make a hat
         g.setColor(purple);
-        g.fillRect(hatRectX, hatRectY, 150, 200);
-        g.fillOval(hatOvalX, hatOvalY, 300, 50);
+        g.fillRect(hatRectX, 60, 150, 200);
+        g.fillOval(hatOvalX, 215, 300, 50);
         // put a stripe across the hat
         g.setColor(green);
-        g.fillRect(hatStripeRectX, hatStripeRectY, 150, 40);
+        g.fillRect(hatStripeRectX, 180, 150, 40);
 
         // make eyes
         g.setColor(Color.BLACK);
@@ -179,26 +174,24 @@ public class A8Q1 extends JComponent implements ActionListener {
         rightToothY1 = rightToothY1 + 2;
         rightToothY2 = rightToothY2 + 2;
         rightToothY3 = rightToothY3 + 2;
-
-        // determine whether if hat should move up or down
         
-//        // determine whether if hat should move left or right
-//        if (hatOvalX >= 345) {
-//            hatMoveRight = false;
-//        } else if (hatOvalX <= 195) {
-//            hatMoveRight = true;
-//        }
-//        // make hat move right
-//        if (hatMoveRight == true) {
-//            hatRectX = hatRectX + 3;
-//            hatOvalX = hatOvalX + 3;
-//            hatStripeRectX = hatStripeRectX + 3;
-//        } else {
-//            // make hat move left
-//            hatRectX = hatRectX - 3;
-//            hatOvalX = hatOvalX - 3;
-//            hatStripeRectX = hatStripeRectX - 3;
-//        }
+        // determine whether if hat should move left or right
+        if (hatOvalX >= 345) {
+            hatMoveRight = false;
+        } else if (hatOvalX <= 195) {
+            hatMoveRight = true;
+        }
+        // make hat move right
+        if (hatMoveRight == true) {
+            hatRectX = hatRectX + 3;
+            hatOvalX = hatOvalX + 3;
+            hatStripeRectX = hatStripeRectX + 3;
+        } else {
+            // make hat move left
+            hatRectX = hatRectX - 3;
+            hatOvalX = hatOvalX - 3;
+            hatStripeRectX = hatStripeRectX - 3;
+        }
 
         // determine whether if the left eye should move in or not
         if (leftEyeX >= 320) {
@@ -259,7 +252,7 @@ public class A8Q1 extends JComponent implements ActionListener {
         // if the mouse has moved positions
         @Override
         public void mouseMoved(MouseEvent e) {
-            // set the mouse coordinates
+            // get the mouse coordinates
             mouseX = e.getX();
             mouseY = e.getY();
         }
