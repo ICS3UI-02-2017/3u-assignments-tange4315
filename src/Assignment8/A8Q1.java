@@ -62,7 +62,7 @@ public class A8Q1 extends JComponent implements ActionListener {
     // make a boolean to move the left eye
     boolean leftEyeMoveIn = true;
     
-    // Y coordinates for the right eye
+    // X coordinates for the right eye
     int rightEyeX = 450;
     int rightLaserX = 460;
     // make a boolean to move the right eye
