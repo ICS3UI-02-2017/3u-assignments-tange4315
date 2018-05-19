@@ -36,7 +36,7 @@ public class A8Q1 extends JComponent implements ActionListener {
    
     // YOUR GAME VARIABLES WOULD GO HERE
    
-    // make colours
+    // make colours for face
     Color skin = new Color(252, 213, 169);
     Color purple = new Color(122, 13, 155);
     Color green = new Color(25, 168, 10);
