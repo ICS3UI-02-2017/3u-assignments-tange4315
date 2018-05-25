@@ -188,6 +188,5 @@ public class A2Challenge {
                 tina.putAllThings();
             }
         }
-
     }
 }

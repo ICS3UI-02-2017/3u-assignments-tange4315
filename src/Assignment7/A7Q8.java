@@ -37,6 +37,6 @@ public class A7Q8 {
     }
     
     public static void main(String[] args) {
-        allDigitsOdd(1236);
+        allDigitsOdd(1336);
     }
 }
