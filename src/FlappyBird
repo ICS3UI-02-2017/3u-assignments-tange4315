@@ -1,0 +1,544 @@
+package FinalProject;
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.Timer;
+
+/**
+ * 
+ * @author tange4315
+ */
+public class FlappyBird extends JComponent implements ActionListener {
+
+    // height and width of game
+    static final int WIDTH = 1000;
+    static final int HEIGHT = 700;
+    // title of window
+    String title = "Flappy Bird";
+    // sets the framerate and delay for our game
+    // this calculates the number of milliseconds per frame
+    // you just need to select an appropriate framerate
+    int desiredFPS = 50;
+    int desiredTime = Math.round((100 / desiredFPS));
+    // timer used to run the game loop
+    // this is what keeps our time running smoothly
+    Timer gameTimer;
+    
+    // speed variable
+    int speed = 1;
+    
+    // create a rectangle for the ground
+    Rectangle ground = new Rectangle(0, 630, WIDTH, 70);
+    
+    // tube variables
+    // variable to store a random height
+    int randomTubeHeight = 0;
+    // x positions of tubes
+    int tubeX[] = {100 + WIDTH, 360 + WIDTH, 620 + WIDTH, 880 + WIDTH};
+    // top tube height values
+    int topTubeHeight[] = new int[4];
+    // y positions of bottom tubes
+    int bottomTubeY[] = new int[4];
+    // bottom tube height values
+    int bottomTubeHeight[] = new int[4];
+    // create rectangles for the top tubes
+    Rectangle topTube1 = new Rectangle(tubeX[0], 0, 60, topTubeHeight[0]);
+    Rectangle topTube2 = new Rectangle(tubeX[1], 0, 60, topTubeHeight[1]);
+    Rectangle topTube3 = new Rectangle(tubeX[2], 0, 60, topTubeHeight[2]);
+    Rectangle topTube4 = new Rectangle(tubeX[3], 0, 60, topTubeHeight[3]);
+    // create rectangles for the bottom tubes
+    Rectangle bottomTube1 = new Rectangle(tubeX[0], bottomTubeY[0], 60, bottomTubeHeight[0]);
+    Rectangle bottomTube2 = new Rectangle(tubeX[1], bottomTubeY[1], 60, bottomTubeHeight[1]);
+    Rectangle bottomTube3 = new Rectangle(tubeX[2], bottomTubeY[2], 60, bottomTubeHeight[2]);
+    Rectangle bottomTube4 = new Rectangle(tubeX[3], bottomTubeY[3], 60, bottomTubeHeight[3]);
+    
+    // bird variables
+    // x and y variables for the bird
+    int birdX = 100;
+    int birdY = 295;
+    // y variable for eye
+    int birdEyeY = 302;
+    // y variable for beak
+    int beakY1 = 302;
+    int beakY2 = 312;
+    int beakY3 = 307;
+    // create a rectangle for the bird
+    Rectangle bird = new Rectangle(birdX, birdY, 48, 40);
+    
+    // jumping variables
+    boolean jump = false;
+    int jumpTo = 0;
+    
+    // start screen variables
+    boolean start = true;
+    Font flappyBird = new Font("arial", Font.BOLD, 55);
+    
+    // death variables
+    int deathCounter = 0;
+    boolean death = false;
+    Font gameOver = new Font("arial", Font.BOLD, 60);
+    Font playAgain = new Font("arial", Font.BOLD, 50);
+    Font birdDead = new Font("arial", Font.BOLD, 15);
+    
+    // score variables
+    int score = 0;
+    int highScore = 0;
+    // create a font for scores
+    Font scoreFont = new Font("arial", Font.BOLD, 36);
+    
+    // colour variables
+    Color background = new Color(113, 198, 208);
+    Color groundColor = new Color(222, 217, 149);
+    Color grass = new Color(146, 223, 78);
+    Color birdColor = new Color(199, 179, 38);
+    Color tube = new Color(116, 193, 42);
+    Color beak = new Color(239, 106, 89);
+    Color blood = new Color(131, 3, 3);
+    
+    // mouse variables
+    int mouseX = 0;
+    int mouseY = 0;
+    
+    // pause variable
+    boolean pause = false;
+
+    // constructor to create the Frame and place the panel ina
+    // you will learn more about this in grade 12
+    public FlappyBird() {
+        // creates a window to show game
+        JFrame frame = new JFrame(title);
+
+        // sets the size of my game
+        this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        // adds the game to the window
+        frame.add(this);
+
+        // sets some options and size of the window automatically
+        frame.setResizable(false);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        // shows the window to the user
+        frame.setVisible(true);
+
+        // add listeners for keyboard and mouse
+        frame.addKeyListener(new Keyboard());
+        Mouse m = new Mouse();
+        this.addMouseMotionListener(m);
+        this.addMouseWheelListener(m);
+        this.addMouseListener(m);
+
+        gameTimer = new Timer(desiredTime, this);
+        gameTimer.setRepeats(true);
+        gameTimer.start();
+    }
+
+    // drawing of the game happens in here
+    // we use the Graphics object, g, to perform the drawing
+    // NOTE: this is already double buffered (helps with framerate/speed)
+    @Override
+    public void paintComponent(Graphics g) {
+        // always clear the screen first
+        g.clearRect(0, 0, WIDTH, HEIGHT);
+
+        // draw the background
+        g.setColor(background);
+        g.fillRect(0, 0, WIDTH, HEIGHT);
+
+        // draw the ground
+        g.setColor(groundColor);
+        g.fillRect(0, 650, WIDTH, 50);
+        g.setColor(grass);
+        g.fillRect(0, 630, WIDTH, 20);
+
+        // draw the tubes
+        g.setColor(tube);
+        for (int i = 0; i < 4; i++) {
+            // draw the top tube
+            g.fillRect(tubeX[i], 0, 60, topTubeHeight[i]);
+            // draw the bottom tube
+            g.fillRect(tubeX[i], bottomTubeY[i], 60, bottomTubeHeight[i]);
+        }
+
+        // draw pool of blood behind bird when dead
+        if (death) {
+            g.setColor(blood);
+            g.fillOval(70, 629, 100, 15);
+        }
+
+        // draw the bird
+        g.setColor(birdColor);
+        g.fillRect(birdX, birdY, 40, bird.height);
+
+        // draw score
+        g.setColor(tube);
+        g.setFont(scoreFont);
+        g.drawString("Score: " + score, 15, 689);
+        // draw highscore
+        g.drawString("Highscore: " + highScore, 500, 689);
+
+        // draw a pause button
+        g.fillRect(955, 655, 40, 40);
+        g.setColor(groundColor);
+        g.drawString("II", 966, 689);
+
+        // start screen
+        if (start) {
+            // draw a rectangle
+            g.setColor(Color.WHITE);
+            g.fillRect(300, 215, 400, 200);
+
+            // display the name of the game
+            g.setColor(tube);
+            g.setFont(flappyBird);
+            g.drawString("FLAPPY BIRD", 316, 293);
+
+            // draw start button
+            g.fillRect(318, 325, 362, 55);
+            g.setColor(Color.WHITE);
+            g.setFont(playAgain);
+            g.drawString("start", 435, 368);
+        }
+
+        // game over screen
+        if (death) {
+            // make bird fall on ground
+            birdY = 590;
+            
+            // draw a rectangle
+            g.setColor(Color.WHITE);
+            g.fillRect(300, 215, 400, 200);
+
+            // tell user game is over
+            g.setColor(blood);
+            g.setFont(gameOver);
+            g.drawString("GAME OVER", 316, 293);
+
+            // draw play again button
+            g.fillRect(318, 325, 362, 55);
+            g.setColor(Color.WHITE);
+            g.setFont(playAgain);
+            g.drawString("play again", 375, 365);
+
+            // make bird look dead
+            g.setColor(Color.BLACK);
+            g.setFont(birdDead);
+            g.drawString("X", 125, 607);
+
+            // draw a beak
+            g.setColor(beak);
+            int deadBeakX[] = {140, 140, 148};
+            int deadBeakY[] = {597, 607, 602};
+            g.fillPolygon(deadBeakX, deadBeakY, 3);
+            
+        } else {
+            // features of bird to draw when bird is not dead
+            // draw a round eye
+            g.setColor(Color.BLACK);
+            g.fillOval(127, birdEyeY, 7, 7);
+
+            // draw a beak
+            g.setColor(beak);
+            int beakX[] = {140, 140, 148};
+            int beakY[] = {beakY1, beakY2, beakY3};
+            g.fillPolygon(beakX, beakY, 3);
+        }
+    }
+
+    // this method is used to do any pre-setup you might need to do
+    // this is run before the game loop begins
+    public void preSetup() {
+    }
+
+    // the main game loop
+    // in here is where all the logic for my game will go
+    public void gameLoop() {
+        updatePositions();
+        generateTubes();
+        moveTubes();
+        moveBird();
+        checkForCollision();
+        score();
+        start();
+        death();
+        pause();
+    }
+
+    private void updatePositions() {
+        // update bird positions
+        bird.x = birdX;
+        bird.y = birdY;
+
+        // update top tube positions
+        // update top tube x positions
+        topTube1.x = tubeX[0];
+        topTube2.x = tubeX[1];
+        topTube3.x = tubeX[2];
+        topTube4.x = tubeX[3];
+        // update top tube heights
+        topTube1.height = topTubeHeight[0];
+        topTube2.height = topTubeHeight[1];
+        topTube3.height = topTubeHeight[2];
+        topTube4.height = topTubeHeight[3];
+
+        // update bottom tube positions
+        // update bottom tube x positions
+        bottomTube1.x = tubeX[0];
+        bottomTube2.x = tubeX[1];
+        bottomTube3.x = tubeX[2];
+        bottomTube4.x = tubeX[3];
+        // update bottom tube y positions
+        bottomTube1.y = bottomTubeY[0];
+        bottomTube2.y = bottomTubeY[1];
+        bottomTube3.y = bottomTubeY[2];
+        bottomTube4.y = bottomTubeY[3];
+        // update bottom tube heights
+        bottomTube1.height = bottomTubeHeight[0];
+        bottomTube2.height = bottomTubeHeight[1];
+        bottomTube3.height = bottomTubeHeight[2];
+        bottomTube4.height = bottomTubeHeight[3];
+    }
+
+    private void generateTubes() {
+        // make a set of tubes reappear on right of screen in different positions
+        for (int i = 0; i < 4; i++) {
+            // check to see if tube has gone off left side of screen
+            if (tubeX[i] + 60 < 0) {
+                // generate a random height for top tube
+                randomTubeHeight = (int) (Math.random() * (370 - 60 + 1)) + 60;
+                topTubeHeight[i] = randomTubeHeight;
+                // calculate height of bottom tube
+                bottomTubeHeight[i] = 430 - topTubeHeight[i];
+                // calculate y position of bottom tube
+                bottomTubeY[i] = topTubeHeight[i] + 200;
+                // make tube reappear on right side of screen
+                tubeX[i] = WIDTH;
+            }
+        }
+    }
+
+    private void moveTubes() {
+        // do not move tubes if bird is dead or if game is paused
+        if (start == false
+                && pause == false
+                && death == false) {
+            // make tubes constantly move towards the left of the screen
+            for (int i = 0; i < 4; i++) {
+                tubeX[i] -= speed;
+            }
+        }
+    }
+
+    private void moveBird() {
+        // do not move bird if it is dead or if game is paused
+        if (start == false
+                && pause == false
+                && death == false) {
+            // make bird jump if it has not hit the ground yet
+            if (jump == true && birdY < 590) {
+                // find where bird needs to jump to
+                jumpTo = birdY - 100;
+                // make bird jump
+                while (birdY > jumpTo) {
+                    birdY -= speed;
+                    birdEyeY -= speed;
+                    beakY1 -= speed;
+                    beakY2 -= speed;
+                    beakY3 -= speed;
+                }
+                // make bird fall
+                jump = false;
+
+            } else if (jump == false && birdY < 590) {
+                // make bird fall
+                birdY += speed;
+                birdEyeY += speed;
+                beakY1 += speed;
+                beakY2 += speed;
+                beakY3 += speed;
+            }
+        }
+    }
+
+    private void checkForCollision() {
+        if (pause == false) {
+            // check for collision with ground and tubes
+            if (birdY == 590
+                    || bird.intersects(ground)
+                    || bird.intersects(topTube1)
+                    || bird.intersects(topTube2)
+                    || bird.intersects(topTube3)
+                    || bird.intersects(topTube4)
+                    || bird.intersects(bottomTube1)
+                    || bird.intersects(bottomTube2)
+                    || bird.intersects(bottomTube3)
+                    || bird.intersects(bottomTube4)) {
+                // make bird die
+                death = true;
+            }
+
+            for (int i = 0; i < 4; i++) {
+                // make bird die if it goes over a tube
+                if (birdY < 0 && birdX == tubeX[i] - 40) {
+                    // make bird die
+                    death = true;
+                }
+            }
+        }
+    }
+
+    private void score() {
+        // do not update score if game is paused
+        if (pause == false) {
+            // check to see if bird successfully went in between a set of tubes
+            for (int i = 0; i < 4; i++) {
+                if (birdX == tubeX[i] + 60
+                        && birdY >= topTubeHeight[i]
+                        && birdY <= topTubeHeight[i] + 200) {
+                    // update score
+                    score++;
+                }
+            }
+        }
+        // update highscore
+        if (score > highScore) {
+            highScore++;
+        }
+    }
+
+    private void start() {
+        // only run at the beginning
+        if (start && deathCounter == 0) {
+            // check to see if start button is clicked
+            if (mouseX >= 318
+                    && mouseX <= 680
+                    && mouseY >= 325
+                    && mouseY <= 380) {
+                // arrange tubes in random positions
+                for (int i = 0; i < 4; i++) {
+                     // generate a random height for top tube
+                    randomTubeHeight = (int) (Math.random() * (370 - 60 + 1)) + 60;
+                    topTubeHeight[i] = randomTubeHeight;
+                    // calculate height of bottom tube
+                    bottomTubeHeight[i] = 430 - topTubeHeight[i];
+                    // calculate y position of bottom tube
+                    bottomTubeY[i] = topTubeHeight[i] + 200;
+                }
+                // start game
+                start = false;
+                // reset mouse position
+                mouseX = 0;
+                mouseY = 0;
+            }
+        }
+    }
+
+    private void death() {
+        // check to see if play again button is clicked
+        if (death == true
+                && mouseX >= 318
+                && mouseX <= 680
+                && mouseY >= 325
+                && mouseY <= 380) {
+            // reset score
+            score = 0;
+            // reset bird
+            birdY = 295;
+            birdEyeY = 302;
+            beakY1 = 302;
+            beakY2 = 312;
+            beakY3 = 307;
+            // reset tubes
+            tubeX[0] = 100 + WIDTH;
+            tubeX[1] = 360 + WIDTH;
+            tubeX[2] = 620 + WIDTH;
+            tubeX[3] = 880 + WIDTH;
+            // make game over screen disappears
+            death = false;
+            // don't display starting screen again
+            deathCounter++;
+            // reset mouse position
+            mouseX = 0;
+            mouseY = 0;
+        }
+    }
+
+    private void pause() {
+        // check to see if pause button is clicked
+        if (death == false
+                && mouseX >= 955
+                && mouseX <= 995
+                && mouseY >= 655
+                && mouseY <= 695) {
+            if (pause) {
+                // unpause game
+                pause = false;
+            } else {
+                // pause game
+                pause = true;
+            }
+            // reset mouse position
+            mouseX = 0;
+            mouseY = 0;
+        }
+    }
+
+    // used to implement any of the Mouse actions
+    private class Mouse extends MouseAdapter {
+
+        // if a mouse button has been pressed down
+        @Override
+        public void mousePressed(MouseEvent e) {
+            // check if left mouse button is pressed
+            if (e.getButton() == MouseEvent.BUTTON1) {
+                // get mouse coordinates
+                mouseX = e.getX();
+                mouseY = e.getY();
+            }
+        }
+    }
+
+    // used to implement any of the Keyboard actions
+    private class Keyboard extends KeyAdapter {
+
+        // if a key has been pressed down
+        @Override
+        public void keyPressed(KeyEvent e) {
+            // get the key code
+            int keyCode = e.getKeyCode();
+            // check if space is being pressed
+            if (keyCode == KeyEvent.VK_SPACE) {
+                // do not tell bird to jump during a pause
+                if (pause == false) {
+                    // make bird jump
+                    jump = true;
+                }
+            }
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        preSetup();
+        gameLoop();
+        repaint();
+    }
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // creates an instance of my game
+        FlappyBird game = new FlappyBird();
+    }
+}
