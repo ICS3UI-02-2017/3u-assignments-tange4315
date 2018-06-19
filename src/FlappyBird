@@ -25,7 +25,7 @@ public class FlappyBird extends JComponent implements ActionListener {
     static final int WIDTH = 1000;
     static final int HEIGHT = 700;
     // title of window
-    String title = "Flappy Bird... Except The Score Is Just A Little Messed Up";
+    String title = "Flappy Bird... Except The Score Is Just A Little Messed Up So Like Just Use Your Imagination";
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an appropriate framerate
