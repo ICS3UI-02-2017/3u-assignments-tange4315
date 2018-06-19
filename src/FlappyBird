@@ -16,7 +16,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.Timer;
 
 /**
- * 
+ *
  * @author tange4315
  */
 public class FlappyBird extends JComponent implements ActionListener {
@@ -25,7 +25,7 @@ public class FlappyBird extends JComponent implements ActionListener {
     static final int WIDTH = 1000;
     static final int HEIGHT = 700;
     // title of window
-    String title = "Flappy Bird";
+    String title = "Flappy Bird... Except The Score Is Just A Little Messed Up";
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an appropriate framerate
@@ -34,13 +34,13 @@ public class FlappyBird extends JComponent implements ActionListener {
     // timer used to run the game loop
     // this is what keeps our time running smoothly
     Timer gameTimer;
-    
+
     // speed variable
-    int speed = 1;
-    
+    int speed = 3;
+
     // create a rectangle for the ground
     Rectangle ground = new Rectangle(0, 630, WIDTH, 70);
-    
+
     // tube variables
     // variable to store a random height
     int randomTubeHeight = 0;
@@ -62,7 +62,7 @@ public class FlappyBird extends JComponent implements ActionListener {
     Rectangle bottomTube2 = new Rectangle(tubeX[1], bottomTubeY[1], 60, bottomTubeHeight[1]);
     Rectangle bottomTube3 = new Rectangle(tubeX[2], bottomTubeY[2], 60, bottomTubeHeight[2]);
     Rectangle bottomTube4 = new Rectangle(tubeX[3], bottomTubeY[3], 60, bottomTubeHeight[3]);
-    
+
     // bird variables
     // x and y variables for the bird
     int birdX = 100;
@@ -75,28 +75,28 @@ public class FlappyBird extends JComponent implements ActionListener {
     int beakY3 = 307;
     // create a rectangle for the bird
     Rectangle bird = new Rectangle(birdX, birdY, 48, 40);
-    
+
     // jumping variables
     boolean jump = false;
     int jumpTo = 0;
-    
+
     // start screen variables
     boolean start = true;
     Font flappyBird = new Font("arial", Font.BOLD, 55);
-    
+
     // death variables
     int deathCounter = 0;
     boolean death = false;
     Font gameOver = new Font("arial", Font.BOLD, 60);
     Font playAgain = new Font("arial", Font.BOLD, 50);
     Font birdDead = new Font("arial", Font.BOLD, 15);
-    
+
     // score variables
     int score = 0;
     int highScore = 0;
     // create a font for scores
     Font scoreFont = new Font("arial", Font.BOLD, 36);
-    
+
     // colour variables
     Color background = new Color(113, 198, 208);
     Color groundColor = new Color(222, 217, 149);
@@ -105,11 +105,11 @@ public class FlappyBird extends JComponent implements ActionListener {
     Color tube = new Color(116, 193, 42);
     Color beak = new Color(239, 106, 89);
     Color blood = new Color(131, 3, 3);
-    
+
     // mouse variables
     int mouseX = 0;
     int mouseY = 0;
-    
+
     // pause variable
     boolean pause = false;
 
@@ -214,7 +214,7 @@ public class FlappyBird extends JComponent implements ActionListener {
         if (death) {
             // make bird fall on ground
             birdY = 590;
-            
+
             // draw a rectangle
             g.setColor(Color.WHITE);
             g.fillRect(300, 215, 400, 200);
@@ -240,7 +240,6 @@ public class FlappyBird extends JComponent implements ActionListener {
             int deadBeakX[] = {140, 140, 148};
             int deadBeakY[] = {597, 607, 602};
             g.fillPolygon(deadBeakX, deadBeakY, 3);
-            
         } else {
             // features of bird to draw when bird is not dead
             // draw a round eye
@@ -263,15 +262,62 @@ public class FlappyBird extends JComponent implements ActionListener {
     // the main game loop
     // in here is where all the logic for my game will go
     public void gameLoop() {
+        start();
+        pause();
         updatePositions();
         generateTubes();
         moveTubes();
         moveBird();
         checkForCollision();
         score();
-        start();
         death();
-        pause();
+    }
+
+    private void start() {
+        // only run at the beginning
+        if (start && deathCounter == 0) {
+            // check to see if start button is clicked
+            if (mouseX >= 318
+                    && mouseX <= 680
+                    && mouseY >= 325
+                    && mouseY <= 380) {
+                // arrange tubes in random positions
+                for (int i = 0; i < 4; i++) {
+                    // generate a random height for top tube
+                    randomTubeHeight = (int) (Math.random() * (370 - 60 + 1)) + 60;
+                    topTubeHeight[i] = randomTubeHeight;
+                    // calculate height of bottom tube
+                    bottomTubeHeight[i] = 430 - topTubeHeight[i];
+                    // calculate y position of bottom tube
+                    bottomTubeY[i] = topTubeHeight[i] + 200;
+                }
+                // start game
+                start = false;
+                // reset mouse position
+                mouseX = 0;
+                mouseY = 0;
+            }
+        }
+    }
+
+    private void pause() {
+        // check to see if pause button is clicked
+        if (death == false
+                && mouseX >= 955
+                && mouseX <= 995
+                && mouseY >= 655
+                && mouseY <= 695) {
+            if (pause) {
+                // unpause game
+                pause = false;
+            } else {
+                // pause game
+                pause = true;
+            }
+            // reset mouse position
+            mouseX = 0;
+            mouseY = 0;
+        }
     }
 
     private void updatePositions() {
@@ -400,46 +446,20 @@ public class FlappyBird extends JComponent implements ActionListener {
     private void score() {
         // do not update score if game is paused
         if (pause == false) {
-            // check to see if bird successfully went in between a set of tubes
+            // check to see if bird went in between a set of tubes
             for (int i = 0; i < 4; i++) {
                 if (birdX == tubeX[i] + 60
-                        && birdY >= topTubeHeight[i]
-                        && birdY <= topTubeHeight[i] + 200) {
+                        && birdY > topTubeHeight[i]
+                        && birdY < bottomTubeY[i] - 40) {
                     // update score
                     score++;
                 }
             }
         }
+
         // update highscore
         if (score > highScore) {
             highScore++;
-        }
-    }
-
-    private void start() {
-        // only run at the beginning
-        if (start && deathCounter == 0) {
-            // check to see if start button is clicked
-            if (mouseX >= 318
-                    && mouseX <= 680
-                    && mouseY >= 325
-                    && mouseY <= 380) {
-                // arrange tubes in random positions
-                for (int i = 0; i < 4; i++) {
-                     // generate a random height for top tube
-                    randomTubeHeight = (int) (Math.random() * (370 - 60 + 1)) + 60;
-                    topTubeHeight[i] = randomTubeHeight;
-                    // calculate height of bottom tube
-                    bottomTubeHeight[i] = 430 - topTubeHeight[i];
-                    // calculate y position of bottom tube
-                    bottomTubeY[i] = topTubeHeight[i] + 200;
-                }
-                // start game
-                start = false;
-                // reset mouse position
-                mouseX = 0;
-                mouseY = 0;
-            }
         }
     }
 
@@ -473,26 +493,6 @@ public class FlappyBird extends JComponent implements ActionListener {
         }
     }
 
-    private void pause() {
-        // check to see if pause button is clicked
-        if (death == false
-                && mouseX >= 955
-                && mouseX <= 995
-                && mouseY >= 655
-                && mouseY <= 695) {
-            if (pause) {
-                // unpause game
-                pause = false;
-            } else {
-                // pause game
-                pause = true;
-            }
-            // reset mouse position
-            mouseX = 0;
-            mouseY = 0;
-        }
-    }
-
     // used to implement any of the Mouse actions
     private class Mouse extends MouseAdapter {
 
@@ -518,8 +518,10 @@ public class FlappyBird extends JComponent implements ActionListener {
             int keyCode = e.getKeyCode();
             // check if space is being pressed
             if (keyCode == KeyEvent.VK_SPACE) {
-                // do not tell bird to jump during a pause
-                if (pause == false) {
+                // do not tell bird to jump during a start, pause, or death
+                if (start == false
+                        && pause == false
+                        && death == false) {
                     // make bird jump
                     jump = true;
                 }
