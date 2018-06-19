@@ -25,7 +25,7 @@ public class FlappyBird extends JComponent implements ActionListener {
     static final int WIDTH = 1000;
     static final int HEIGHT = 700;
     // title of window
-    String title = "Flappy Bird... Except The Score Is Just A Little Messed Up So Like Just Use Your Imagination";
+    String title = "Flappy Bird";
     // sets the framerate and delay for our game
     // this calculates the number of milliseconds per frame
     // you just need to select an appropriate framerate
@@ -36,7 +36,7 @@ public class FlappyBird extends JComponent implements ActionListener {
     Timer gameTimer;
 
     // speed variable
-    int speed = 3;
+    int speed = 1;
 
     // create a rectangle for the ground
     Rectangle ground = new Rectangle(0, 630, WIDTH, 70);
@@ -82,6 +82,7 @@ public class FlappyBird extends JComponent implements ActionListener {
 
     // start screen variables
     boolean start = true;
+    boolean birdMoveDown = true;
     Font flappyBird = new Font("arial", Font.BOLD, 55);
 
     // death variables
@@ -276,6 +277,10 @@ public class FlappyBird extends JComponent implements ActionListener {
     private void start() {
         // only run at the beginning
         if (start && deathCounter == 0) {
+            // g.fillRect(300, 215, 400, 200);
+            // determine if bird needs to move up or down
+            // make bird move up
+            // make bird move down
             // check to see if start button is clicked
             if (mouseX >= 318
                     && mouseX <= 680
